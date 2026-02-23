@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Princess Mathivadhani Birthday</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+overflow-x:hidden;
+}
+
+/* Loading Screen */
+#loader{
+position:fixed;
+width:100%;
+height:100%;
+background:linear-gradient(45deg,#ff9a9e,#fbc2eb,#a18cd1);
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:9999;
+color:white;
+}
+
+.loader-heart{
+font-size:50px;
+animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.3);}
+100%{transform:scale(1);}
+}
+
+/* Password Screen */
+#passwordScreen{
+position:fixed;
+width:100%;
+height:100%;
+background:linear-gradient(135deg,#ff9a9e,#fad0c4,#a18cd1);
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:999;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+input{
+padding:10px;
+border:none;
+border-radius:20px;
+margin-top:10px;
+text-align:center;
+}
+
+button{
+padding:10px 20px;
+border:none;
+border-radius:25px;
+background:white;
+color:#ff4da6;
+font-weight:bold;
+margin-top:15px;
+cursor:pointer;
+}
+
+/* Main Content */
+#mainContent{
+display:none;
+background:linear-gradient(-45deg,#ff9a9e,#fad0c4,#fbc2eb,#a18cd1);
+background-size:400% 400%;
+animation:gradient 10s ease infinite;
+color:white;
+text-align:center;
+min-height:100vh;
+padding-bottom:50px;
+}
+
+@keyframes gradient{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+
+h1{
+font-family:'Pacifico',cursive;
+font-size:2rem;
+padding:40px 20px 10px;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+gap:15px;
+padding:20px;
+}
+
+.gallery img{
+width:100%;
+border-radius:15px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.gallery img:hover{
+transform:scale(1.05);
+}
+
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+justify-content:center;
+align-items:center;
+}
+
+.modal img{
+max-width:80%;
+border-radius:15px;
+}
+
+/* Floating hearts */
+.heart{
+position:fixed;
+bottom:-10px;
+animation:float 5s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(-800px);opacity:0;}
+}
+
+footer{
+margin-top:30px;
+font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Loading Screen -->
+<div id="loader">
+<div class="loader-heart">💖</div>
+<p>Loading Surprise for Princess...</p>
+</div>
+
+<!-- Password Screen -->
+<div id="passwordScreen">
+<h2>🔐 Enter Secret Password</h2>
+<p>Only for Mathivadhani 👑</p>
+<input type="password" id="passwordInput" placeholder="Enter Password">
+<button onclick="checkPassword()">Unlock Magic ✨</button>
+<p id="errorMsg" style="color:yellow;margin-top:10px;"></p>
+</div>
+
+<!-- Main Content -->
+<div id="mainContent">
+
+<h1>🎀 Happy Birthday My Little Princess Mathivadhani 💕</h1>
+
+<section>
+<h2>📸 Our Memories</h2>
+<div class="gallery">
+<img src="photo1.jpg" onclick="openModal(this)">
+<img src="photo2.jpg" onclick="openModal(this)">
+<img src="photo3.jpg" onclick="openModal(this)">
+<img src="photo4.jpg" onclick="openModal(this)">
+</div>
+</section>
+
+<section>
+<h2>🎊 Open Your Surprise</h2>
+<button onclick="confetti()">Open Gift 🎁</button>
+</section>
+
+<footer>Made with 💖 by Akka</footer>
+
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal" onclick="closeModal()">
+<img id="modalImg">
+</div>
+
+<script>
+
+/* Loading Delay */
+window.onload=function(){
+setTimeout(()=>{
+document.getElementById("loader").style.display="none";
+},2500);
+};
+
+/* Password */
+function checkPassword(){
+let password="princess123";  // CHANGE THIS PASSWORD
+let input=document.getElementById("passwordInput").value;
+
+if(input===password){
+document.getElementById("passwordScreen").style.display="none";
+document.getElementById("mainContent").style.display="block";
+confetti();
+}else{
+document.getElementById("errorMsg").innerText="Wrong Password 😜 Try Again!";
+}
+}
+
+/* Modal */
+function openModal(img){
+document.getElementById("modal").style.display="flex";
+document.getElementById("modalImg").src=img.src;
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+
+/* Floating Hearts */
+setInterval(function(){
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="💖";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(Math.random()*20+20)+"px";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),5000);
+},600);
+
+/* Confetti */
+function confetti(){
+for(let i=0;i<120;i++){
+let conf=document.createElement("div");
+conf.style.position="fixed";
+conf.style.width="8px";
+conf.style.height="8px";
+conf.style.background="hsl("+Math.random()*360+",100%,50%)";
+conf.style.left=Math.random()*100+"vw";
+conf.style.top="-10px";
+conf.style.transition="top 3s linear";
+document.body.appendChild(conf);
+setTimeout(()=>{conf.style.top="100vh";},10);
+setTimeout(()=>conf.remove(),3000);
+}
+}
+
+</script>
+
+</body>
+</html>
